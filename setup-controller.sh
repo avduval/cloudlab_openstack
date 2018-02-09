@@ -4487,4 +4487,21 @@ touch $OURDIR/controller-done
 
 logtend "controller"
 
+yum install devtoolset-4-gcc
+yum install gcc
+
+yum install openmpi
+yum install environment-modules
+module load mpi/openmpi-x86_64
+
+
+yum install wget
+yum install bzip2
+wget -c http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+chmod +x Miniconda-Latest-Linux-x86_64.sh
+./Miniconda-latest-Linux-x86_64.sh
+export PATH=~/miniconda/bin:$PATH
+
+conda install mpi4py
+
 exit 0
