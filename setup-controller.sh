@@ -4456,7 +4456,7 @@ subnet_id=`openstack network show -f shell flat-lan-1-net | grep "^subnets=" | c
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.21 testport1
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.22 testport2
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.23 testport3
-openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.23 testport4
+openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.24 testport4
 
 # See https://docs.openstack.org/project-install-guide/baremetal/draft/configure-glance-images.html
 wget -O /tmp/setup/OL7.vmdk https://clemson.box.com/shared/static/o00tqb3yzgscg8f156yt4gw0d5hf8v99
@@ -4470,16 +4470,16 @@ security_id=`openstack security group list -f value | grep $project_id | cut -d'
 port_id=`openstack port list -f value | grep testport1 | cut -d' ' -f 1`
 
 # See https://docs.openstack.org/mitaka/install-guide-ubuntu/launch-instance-selfservice.html
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnodea
 
 port_id=`openstack port list -f value | grep testport2 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id hnone
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnodeb
 
 port_id=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id hntwo
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnodec
 
 port_id=`openstack port list -f value | grep testport4 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id hnthree
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnoded
 
 
 
@@ -4496,21 +4496,5 @@ echo "Your OpenStack instance has completed setup!  Browse to http://$CONTROLLER
 touch $OURDIR/controller-done
 
 logtend "controller"
-
-#	yum install devtoolset-4-gcc
-#	yum install gcc
-#
-#	yum install openmpi
-#	yum install environment-modules
-#	module load mpi/openmpi-x86_64
-#
-#
-#	yum install wget
-#	yum install bzip2
-#	wget -c http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
-#	chmod +x Miniconda-Latest-Linux-x86_64.sh
-#	./Miniconda-latest-Linux-x86_64.sh
-#	export PATH=~/miniconda/bin:$PATH
-#	conda install mpi4py
 
 exit 0
