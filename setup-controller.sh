@@ -4473,13 +4473,13 @@ port_id=`openstack port list -f value | grep testport1 | cut -d' ' -f 1`
 openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
 
 port_id=`openstack port list -f value | grep testport2 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode2
 
 port_id=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode3
 
 port_id=`openstack port list -f value | grep testport4 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode4
 
 
 
