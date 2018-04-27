@@ -4518,10 +4518,10 @@ security_id=`openstack security group list -f value | grep $project_id | cut -d'
 
 
 port_id=`openstack port list -f value | grep testport5 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id computea
+openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id storagea
 
 port_id=`openstack port list -f value | grep testport6 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id computeb
+openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id storageb
 
 rm /tmp/setup/OL7storage.vmdk
 glance image-delete $image_id
