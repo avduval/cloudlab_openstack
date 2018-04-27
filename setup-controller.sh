@@ -4484,7 +4484,9 @@ glance image-delete $image_id
 #############################################################################################
 ### COMPUTE NODES ###
 #####################
-wget -O /tmp/setup/OL7compute.vmdk https://clemson.box.com/shared/static/****** COMPUTE *****
+
+# https://clemson.box.com/s/nz9ft1f51p8ajgff4u5x4wfu76h9to8r
+wget -O /tmp/setup/OL7compute.vmdk https://clemson.box.com/shared/static/nz9ft1f51p8ajgff4u5x4wfu76h9to8r
 glance image-create --name OL7compute --disk-format vmdk --visibility public --container-format bare < /tmp/setup/OL7compute.vmdk
 
 project_id=`openstack project list -f value | grep admin | cut -d' ' -f 1`
@@ -4508,7 +4510,8 @@ glance image-delete $image_id
 ##########################################################################################
 ### STORAGE NODES ###
 #####################
-wget -O /tmp/setup/OL7storage.vmdk https://clemson.box.com/shared/static/****** Storage *****
+# https://clemson.box.com/s/s9lqub6qfxoqky9mt2amwgyuj3q54sye
+wget -O /tmp/setup/OL7storage.vmdk https://clemson.box.com/shared/static/s9lqub6qfxoqky9mt2amwgyuj3q54sye
 glance image-create --name OL7storage --disk-format vmdk --visibility public --container-format bare < /tmp/setup/OL7storage.vmdk
 
 project_id=`openstack project list -f value | grep admin | cut -d' ' -f 1`
