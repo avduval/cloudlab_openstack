@@ -4486,48 +4486,50 @@ glance image-delete $image_id
 #####################
 
 # https://clemson.box.com/s/nz9ft1f51p8ajgff4u5x4wfu76h9to8r
-wget -O /tmp/setup/OL7compute.vmdk https://clemson.box.com/shared/static/nz9ft1f51p8ajgff4u5x4wfu76h9to8r
-glance image-create --name OL7compute --disk-format vmdk --visibility public --container-format bare < /tmp/setup/OL7compute.vmdk
+wget -O /tmp/setup/ComputeOL7.vmdk https://clemson.box.com/shared/static/nz9ft1f51p8ajgff4u5x4wfu76h9to8r.vmdk
+glance image-create --name ComputeOL7 --disk-format vmdk --visibility public --container-format bare < /tmp/setup/ComputeOL7.vmdk
 
 project_id=`openstack project list -f value | grep admin | cut -d' ' -f 1`
 flavor_id=`openstack flavor list -f value | grep m1.small | cut -d' ' -f 1`
-image_id=`openstack image list -f value | grep OL7compute | cut -d' ' -f 1`
+image_id=`openstack image list -f value | grep ComputeOL7 | cut -d' ' -f 1`
 security_id=`openstack security group list -f value | grep $project_id | cut -d' ' -f 1`
 
 
 port_id=`openstack port list -f value | grep testport2 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7compute --nic port-id=$port_id computea
+openstack server create --flavor m1.medium --security-group $security_id --image ComputeOL7 --nic port-id=$port_id computea
 
 port_id=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7compute --nic port-id=$port_id computeb
+openstack server create --flavor m1.medium --security-group $security_id --image ComputeOL7 --nic port-id=$port_id computeb
 
 port_id=`openstack port list -f value | grep testport4 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7compute --nic port-id=$port_id computec
+openstack server create --flavor m1.medium --security-group $security_id --image ComputeOL7 --nic port-id=$port_id computec
 
-rm /tmp/setup/OL7compute.vmdk
+
 glance image-delete $image_id
+rm /tmp/setup/ComputeOL7.vmdk
 
 ##########################################################################################
 ### STORAGE NODES ###
 #####################
 # https://clemson.box.com/s/s9lqub6qfxoqky9mt2amwgyuj3q54sye
-wget -O /tmp/setup/OL7storage.vmdk https://clemson.box.com/shared/static/s9lqub6qfxoqky9mt2amwgyuj3q54sye
-glance image-create --name OL7storage --disk-format vmdk --visibility public --container-format bare < /tmp/setup/OL7storage.vmdk
+wget -O /tmp/setup/StorageOL7.vmdk https://clemson.box.com/shared/static/s9lqub6qfxoqky9mt2amwgyuj3q54sye.vmdk
+glance image-create --name StorageOL7 --disk-format vmdk --visibility public --container-format bare < /tmp/setup/StorageOL7.vmdk
 
 project_id=`openstack project list -f value | grep admin | cut -d' ' -f 1`
 flavor_id=`openstack flavor list -f value | grep m1.small | cut -d' ' -f 1`
-image_id=`openstack image list -f value | grep OL7storage | cut -d' ' -f 1`
+image_id=`openstack image list -f value | grep StorageOL7 | cut -d' ' -f 1`
 security_id=`openstack security group list -f value | grep $project_id | cut -d' ' -f 1`
 
 
 port_id=`openstack port list -f value | grep testport5 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id storagea
+openstack server create --flavor m1.medium --security-group $security_id --image StorageOL7 --nic port-id=$port_id storagea
 
 port_id=`openstack port list -f value | grep testport6 | cut -d' ' -f 1`
-openstack server create --flavor m1.medium --security-group $security_id --image OL7storage --nic port-id=$port_id storageb
+openstack server create --flavor m1.medium --security-group $security_id --image StorageOL7 --nic port-id=$port_id storageb
 
-rm /tmp/setup/OL7storage.vmdk
+
 glance image-delete $image_id
+rm /tmp/setup/StorageOL7.vmdk
 
 
 echo "***"
